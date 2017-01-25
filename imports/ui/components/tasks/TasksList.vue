@@ -1,10 +1,9 @@
 <template>
   <div class="tasks-list">
-    <h2>TasksList</h2>
     <toast v-if="error" :text="error" type="error"></toast>
     <toast v-if="success" :text="success" type="success"></toast>
     <div v-if="!$subReady.tasks" class="loading"></div>
-    <ul>
+    <ul v-sortable>
       <task-item v-for="task in tasks" :task="task" />
     </ul>
   </div>
@@ -14,7 +13,9 @@
 import TaskItem from '/imports/ui/components/tasks/TaskItem.vue';
 import Toast from '/imports/ui/components/Toast.vue';
 import Tasks from '/imports/api/tasks/collection';
+import Sortable from 'vue-sortable'
 
+Vue.use(Sortable);
 export default {
   data() {
     return {
@@ -54,3 +55,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.tasks-list {
+  ul {
+    list-style-type: none;
+    margin-left: 0;
+  }
+}
+</style>

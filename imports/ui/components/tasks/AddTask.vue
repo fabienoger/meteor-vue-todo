@@ -4,7 +4,7 @@
     <toast v-if="success" :text="success" type="success"></toast>
     <div class="form-group">
       <label class="form-label" for="task-text">Add task</label>
-      <input class="form-input" type="text" id="task-text" placeholder="Text" v-model="taskText"/>
+      <input class="form-input" type="text" id="task-text" placeholder="Text" v-model="taskText" v-on:keyup.enter="addTask" />
     </div>
     <button class="btn btn-primary" v-bind:class="{ loading: loading }" v-on:click="addTask">Add task</button>
   </form>
@@ -35,7 +35,9 @@ export default {
       const task = {
         text: this.taskText
       };
-
+      if (!task.text) {
+        return this.loading = false;
+      }
       Meteor.call("addTask", task, (err, taskId) => {
         this.loading = false;
         if (err) {

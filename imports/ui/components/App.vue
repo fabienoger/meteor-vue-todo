@@ -1,9 +1,9 @@
 <template>
   <div class="app container">
-    <h1>App.vue</h1>
+    <h1>Todo List <small class="label">MeteorJS + VueJS</small></h1>
     <div class="columns">
-      <add-task class="column col-6"></add-task>
-      <tasks-list class="column col-6"></tasks-list>
+      <add-task class="column col-4"></add-task>
+      <tasks-list class="column col-8"></tasks-list>
     </div>
   </div>
 </template>
