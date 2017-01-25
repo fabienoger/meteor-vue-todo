@@ -1,6 +1,7 @@
 <template>
   <form class="add-task">
     <toast v-if="error" :text="error" type="error"></toast>
+    <toast v-if="success" :text="success" type="success"></toast>
     <div class="form-group">
       <label class="form-label" for="task-text">Add task</label>
       <input class="form-input" type="text" id="task-text" placeholder="Text" v-model="taskText"/>
@@ -20,6 +21,12 @@ export default {
       success: '',
       taskText: ''
     }
+  },
+  created() {
+    // Listen for closing Toast
+    this.$on('closeToast', (toast) => {
+      this[toast.type] = false;
+    })
   },
   methods: {
     addTask(e) {
