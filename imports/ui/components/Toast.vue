@@ -2,7 +2,7 @@
   <div>
     <div class="toast" v-bind:class="[type == 'error' ? 'toast-danger' : '', type == 'success' ? 'toast-success' : '' ]">
       <button class="btn btn-clear float-right" v-on:click="close"></button>
-      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;
       {{ text }}
     </div>
   </div>
