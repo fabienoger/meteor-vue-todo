@@ -15,7 +15,7 @@ export default {
     close(e) {
       e.preventDefault();
       // Emit event for closing Toast
-      this.$dispatch('closeToast', this);
+      this.$emit('closeToast', this);
     }
   }
 }

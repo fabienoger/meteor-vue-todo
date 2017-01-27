@@ -9,8 +9,10 @@
 <script>
 import Vuex from 'vuex';
 import TaskItem from '/imports/ui/components/tasks/TaskItem.vue';
+import store from '/imports/vuex/store';
 
 export default {
+  store,
   components: {
     TaskItem
   },
