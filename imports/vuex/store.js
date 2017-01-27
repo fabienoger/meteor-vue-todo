@@ -1,7 +1,8 @@
-import { StoreModule } from 'meteor/akryum:vuex';
+import Vuex from 'vuex';
 import tasks from './modules/tasks.js';
 
-const root = new StoreModule();
-root.addModule(tasks);
-
-export const store = root.exportStore();
+export default new Vuex.Store({
+  modules: {
+    tasks
+  }
+});

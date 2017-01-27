@@ -6,15 +6,17 @@
 </template>
 
 <script>
+import Vuex from 'vuex';
+
 export default {
   props: {
     task: Object
   },
-  vuex: ({tasks}) => ({
-    actions: {
-      removeTask: tasks.actions.removeTask
-    }
-  })
+  methods: {
+    ...Vuex.mapActions([
+      'removeTask'
+    ])
+  }
 }
 </script>
 

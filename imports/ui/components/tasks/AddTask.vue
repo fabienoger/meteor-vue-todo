@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import Vuex from 'vuex';
 import Toast from '/imports/ui/components/Toast.vue';
 
 export default {
@@ -26,12 +27,10 @@ export default {
       this[toast.type] = false;
     })
   },
-  vuex: ({tasks}) => ({
-    actions: {
-      createTask: tasks.actions.createTask
-    }
-  }),
   methods: {
+    ...Vuex.mapActions([
+      'createTask'
+    ]),
     handleCreateTask() {
       this.loading = true;
       this.createTask(this.taskText.trim()).then(() => {

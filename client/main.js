@@ -1,24 +1,22 @@
 // Libs
 import {Meteor} from 'meteor/meteor';
-import Vue from 'vue';
-//import router from '/imports/router';
+import {Vue} from 'meteor/akryum:vue';
+import Vuex from 'vuex';
+import Sortable from 'sortablejs';
 
-// Main app
-//import AppLayout from '/imports/ui/components/AppLayout.vue';
+// Components
 import App from '/imports/ui/components/App.vue';
+
+Vue.directive('sortable', {
+  inserted: function (el, binding) {
+    new Sortable(el, binding.value || {})
+  }
+});
+
+Vue.use(Vuex);
 
 Meteor.startup(() => {
   new Vue({
-    el: 'body',
-    replace: true,
-    components: {
-      App
-    }
-  });
-  /*
-  new Vue({
-    router: router.start(),
-    render: h => h(AppLayout)
+    render: h => h(App),
   }).$mount('app');
-  */
 });

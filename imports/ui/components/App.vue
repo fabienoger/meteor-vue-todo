@@ -11,7 +11,7 @@
 <script>
 import AddTask from '/imports/ui/components/tasks/AddTask.vue';
 import TasksList from '/imports/ui/components/tasks/TasksList.vue';
-import {store} from '/imports/vuex/store';
+import store from '/imports/vuex/store';
 
 export default {
   store,
