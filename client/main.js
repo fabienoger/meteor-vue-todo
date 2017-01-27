@@ -3,9 +3,10 @@ import {Meteor} from 'meteor/meteor';
 import {Vue} from 'meteor/akryum:vue';
 import Vuex from 'vuex';
 import Sortable from 'sortablejs';
+import router from '/imports/router';
 
 // Components
-import App from '/imports/ui/components/App.vue';
+import AppLayout from '/imports/ui/components/AppLayout.vue';
 
 Vue.directive('sortable', {
   inserted: function (el, binding) {
@@ -13,10 +14,9 @@ Vue.directive('sortable', {
   }
 });
 
-Vue.use(Vuex);
-
 Meteor.startup(() => {
   new Vue({
-    render: h => h(App),
+    router: router.start(),
+    render: h => h(AppLayout),
   }).$mount('app');
 });

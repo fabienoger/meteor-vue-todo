@@ -23,6 +23,5 @@ akryum:vue-component
 akryum:vue-sass
 fortawesome:fontawesome
 fourseven:scss
-akryum:vuex
 check
-#akryum:vue-router2
+akryum:vue-router2
