@@ -1,16 +1,19 @@
 import Tasks from './collection.js';
+import { NonEmptyString } from '/imports/utils/match';
+
 
 Meteor.methods({
-  addTask: (task) => {
-    if (!task || !task.text) {
-      throw new Meteor.Error("missing-param", "Missing 'task' param");
-    }
-    return Tasks.insert(task);
+  // Insert new Task in Mongo
+  addTask: (text) => {
+    check(text, NonEmptyString);
+    return Tasks.insert({
+      text,
+      createdAt: new Date()
+    });
   },
+  // Remove Task from id
   removeTask: (id) => {
-    if (!id) {
-      throw new Meteor.Error("missing-param", "Missing 'id' param");
-    }
+    check(id, NonEmptyString);
     return Tasks.remove({_id: id});
   }
 });

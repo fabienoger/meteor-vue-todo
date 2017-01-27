@@ -1,12 +1,11 @@
 // Libs
 import {Meteor} from 'meteor/meteor';
-import {Vue} from 'meteor/akryum:vue';
+import Vue from 'vue';
+//import router from '/imports/router';
 
 // Main app
+//import AppLayout from '/imports/ui/components/AppLayout.vue';
 import App from '/imports/ui/components/App.vue';
-
-// Data
-import Tasks from '/imports/api/tasks/collection';
 
 Meteor.startup(() => {
   new Vue({
@@ -16,4 +15,10 @@ Meteor.startup(() => {
       App
     }
   });
+  /*
+  new Vue({
+    router: router.start(),
+    render: h => h(AppLayout)
+  }).$mount('app');
+  */
 });

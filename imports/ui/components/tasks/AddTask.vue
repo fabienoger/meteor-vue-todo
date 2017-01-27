@@ -1,12 +1,12 @@
 <template>
-  <form class="add-task">
+  <form @submit.prevent="handleCreateTask" class="add-task">
     <toast v-if="error" :text="error" type="error"></toast>
     <toast v-if="success" :text="success" type="success"></toast>
     <div class="form-group">
       <label class="form-label" for="task-text">Add task</label>
-      <input class="form-input" type="text" id="task-text" placeholder="Text" v-model="taskText" v-on:keyup.enter="addTask" />
+      <input class="form-input" type="text" id="task-text" placeholder="Text" v-model="taskText"  />
     </div>
-    <button class="btn btn-primary" v-bind:class="{ loading: loading }" v-on:click="addTask">Add task</button>
+    <button class="btn btn-primary" type="submit" v-bind:class="{ loading: loading }" >Add task</button>
   </form>
 </template>
 
@@ -14,38 +14,34 @@
 import Toast from '/imports/ui/components/Toast.vue';
 
 export default {
-  data() {
-    return {
-      loading: false,
-      error: '',
-      success: '',
-      taskText: ''
-    }
-  },
+  data: () => ({
+    loading: false,
+    error: '',
+    success: '',
+    taskText: ''
+  }),
   created() {
     // Listen for closing Toast
     this.$on('closeToast', (toast) => {
       this[toast.type] = false;
     })
   },
+  vuex: ({tasks}) => ({
+    actions: {
+      createTask: tasks.actions.createTask
+    }
+  }),
   methods: {
-    addTask(e) {
-      e.preventDefault();
+    handleCreateTask() {
       this.loading = true;
-      const task = {
-        text: this.taskText
-      };
-      if (!task.text) {
-        return this.loading = false;
-      }
-      Meteor.call("addTask", task, (err, taskId) => {
+      this.createTask(this.taskText.trim()).then(() => {
         this.loading = false;
-        if (err) {
-          this.error = 'The task cannot be empty';
-          return console.error("addTask", err);
-        }
         this.success = 'The task has been successfully added !';
         this.taskText = '';
+      }).catch((e) => {
+        this.loading = false;
+        this.error = 'The task cannot be empty';
+        return console.error("createTask", e);
       });
     }
   },
