@@ -33,15 +33,16 @@ export default {
     ]),
     handleCreateTask() {
       this.loading = true;
-      this.createTask(this.taskText.trim()).then(() => {
+      try {
+        this.createTask(this.taskText.trim());
         this.loading = false;
         this.success = 'The task has been successfully added !';
         this.taskText = '';
-      }).catch((e) => {
+      } catch (e) {
         this.loading = false;
         this.error = 'The task cannot be empty';
         return console.error("createTask", e);
-      });
+      }
     }
   },
   components: {
