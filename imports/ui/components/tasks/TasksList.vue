@@ -2,6 +2,7 @@
   <div class="tasks-list">
     <ul v-sortable>
       <task-item v-for="task in tasks" :task="task" />
+      <div v-show="tasks.length < 1" class="loading"></div>
     </ul>
   </div>
 </template>
